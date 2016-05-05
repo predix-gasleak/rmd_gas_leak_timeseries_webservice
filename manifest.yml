@@ -1,0 +1,16 @@
+#inherit: base-manifest.yml 
+applications:
+  - name: rmd_gas_leak_timeseries_webservice
+    buildpack: java_buildpack
+    path: target/rmd_gas_leak_timeseries_webservice-1.1.10.jar
+    memory: 1G
+    services:
+      - rmd_gas_leak_uaa_instance
+      - rmd_gas_leak_timeseries_service
+env:
+    predix_timeseries_name : rmd_gas_leak_timeseries_service
+    predix_oauthRestHost : e96209ad-2e7b-4b17-a38c-7b9e023bef25.predix-uaa.run.aws-usw02-pr.ice.predix.io
+    predix_oauthClientId : client:password
+    trustedIssuerIdsRegexPattern : ^http://(.*\\.)?.predix-uaa.run.aws-usw02-pr.ice/oauth/token$
+    predix_connectionTimeout : 5000
+    predix_socketTimeout : 5000
